@@ -17,7 +17,8 @@ plotBar(
   seed = NA,
   legend = T,
   number = T,
-  type = "fill"
+  type = "fill",
+  verb = T
 )
 
 plotBar2(
@@ -29,7 +30,8 @@ plotBar2(
   resLevels = NA,
   seed = NA,
   legend = T,
-  type = "fill"
+  type = "fill",
+  verb = T
 )
 }
 \arguments{

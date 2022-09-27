@@ -1,4 +1,4 @@
-Package: gpparcompanion
+Package: gppacompanion
 Title: What the Package Does (One Line, Title Case)
 Version: 0.0.0.9000
 Authors@R: 
@@ -24,4 +24,5 @@ Imports:
     ggpmisc,
     ryouready,
     rcompanion,
-    ggcorrplot
+    ggcorrplot,
+    ggpubr

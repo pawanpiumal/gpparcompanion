@@ -5,7 +5,7 @@
 #' 
 #' @export
 plotSc = function(var, res, pName=NA, resName= NA ,seed=NA, title = T, method = "auto", 
-                  transX = NA, transY = NA){
+                  transX = NA, transY = NA, verb = T){
   
   if(!is.numeric(var) || !is.numeric(res)){
     stop(simpleError("Var or res is/are not numeric variable/s"))
@@ -50,7 +50,9 @@ plotSc = function(var, res, pName=NA, resName= NA ,seed=NA, title = T, method = 
   
   data = data.frame(var=var,res=res)
   
-  cat('Random Seed: ',seed, '\n')
+  if(verb){
+    cat('Random Seed: ',seed, '\n')
+  }
   plt = ggplot(data,aes(x=funcX(var),y=funcY(res)))+
     geom_point(size=2,color=randomColor(seed))+
     geom_smooth(method=method, se=T, color = "black", size=1.4, formula = y~x)+

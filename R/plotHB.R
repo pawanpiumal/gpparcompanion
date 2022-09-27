@@ -16,7 +16,7 @@
 #' histogram
 #'
 #' @export
-plotHB <- function(var, title = NA, varname = NA, seed = NA, histX = F) {
+plotHB <- function(var, title = NA, varname = NA, seed = NA, histX = F, verb = T) {
   
   if(!is.numeric(var)){
     stop(simpleError("Variable is not numeric."))
@@ -86,7 +86,9 @@ plotHB <- function(var, title = NA, varname = NA, seed = NA, histX = F) {
     plt2 = plt2 + geomTheme3
   }
   
-  cat('Random Seed: ',seed, '\n')
+  if(verb){
+    cat('Random Seed: ',seed, '\n')
+  }
   return (cowplot::plot_grid(plt2, plt1,
                              ncol = 1, rel_heights = c(2, 1),
                              align = "v", axis = "lr"

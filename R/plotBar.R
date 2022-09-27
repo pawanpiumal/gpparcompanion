@@ -10,7 +10,7 @@
 #'
 #' @export
 plotBar = function(var, res, group = NA, varname = NA, title = NA, varLevels = NA, resLevels = NA,
-                   groupLevels = NA, seed = NA, legend = T, number = T, type = "fill"){
+                   groupLevels = NA, seed = NA, legend = T, number = T, type = "fill", verb = T){
   
   if(!is.factor(var) || !is.factor(res)){
     stop(simpleError("Var or res is/are not factor variable/s."))
@@ -67,8 +67,10 @@ plotBar = function(var, res, group = NA, varname = NA, title = NA, varLevels = N
     data2 = data %>% select(group1, group2,Frequency) %>% 
       group_by(group2) %>% summarise(Proportion = Frequency/sum(Frequency))
   }
+  if(verb){
+    cat('Random Seed: ',seed, '\n')
+  }
   
-  cat('Random Seed: ',seed, '\n')
   if(any(is.na(group))){
     plt = ggplot(data, aes(fill=group1, y=Frequency ,x=group2)) + 
       geom_bar(position=type, stat="identity")+

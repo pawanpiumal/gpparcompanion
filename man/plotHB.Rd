@@ -4,7 +4,7 @@
 \alias{plotHB}
 \title{Plot Histogram and Box plot in the same graph}
 \usage{
-plotHB(var, title = NA, varname = NA, seed = NA, histX = F)
+plotHB(var, title = NA, varname = NA, seed = NA, histX = F, verb = T)
 }
 \arguments{
 \item{var}{The variable that needs to be plotted. The variable needs to be

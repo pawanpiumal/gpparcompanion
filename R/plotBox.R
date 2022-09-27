@@ -9,7 +9,7 @@
 #' 
 #' @export
 plotBox = function(var, res, title = NA, varname = NA, resLevels= NA, seed = NA,
-                   legend = F){
+                   legend = F, verb = T){
   # Themes
   # Center Plot Title
   geomTheme = theme(plot.title = element_text(hjust = 0.5,face="bold"))
@@ -38,7 +38,9 @@ plotBox = function(var, res, title = NA, varname = NA, resLevels= NA, seed = NA,
   
   data = data.frame(response,var)
 
-  cat('Random Seed: ',seed, '\n')
+  if(verb){
+    cat('Random Seed: ',seed, '\n')
+  }
   plt = ggplot(data, aes(x=response, y=var, fill=response)) + 
     geom_boxplot() +
     xlab(res) +

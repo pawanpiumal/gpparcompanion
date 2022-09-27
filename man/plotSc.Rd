@@ -13,7 +13,8 @@ plotSc(
   title = T,
   method = "auto",
   transX = NA,
-  transY = NA
+  transY = NA,
+  verb = T
 )
 }
 \description{

@@ -15,7 +15,8 @@ plotPie(
   percentage = F,
   legend = T,
   out = F,
-  groupOut = F
+  groupOut = F,
+  verb = T
 )
 }
 \arguments{

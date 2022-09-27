@@ -28,7 +28,7 @@
 #'
 #' @export
 plotPie = function(var,title = NA,varname = NA, levels=NA, seed = NA, text = F, 
-                   frequency = F, percentage = F, legend = T, out = F, groupOut = F){
+                   frequency = F, percentage = F, legend = T, out = F, groupOut = F, verb = T){
   
   if(!is.factor(var)){
     stop(simpleError("Variable is not factor."))
@@ -80,7 +80,9 @@ plotPie = function(var,title = NA,varname = NA, levels=NA, seed = NA, text = F,
           legend.title = element_text(face="bold"))+
     labs(fill="Group")
   
-  cat('Random Seed: ',seed, '\n')
+  if(verb){
+    cat('Random Seed: ',seed, '\n')
+  }
   
   Str = ""
   

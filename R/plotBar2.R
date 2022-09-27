@@ -8,7 +8,7 @@
 #'
 #' @export
 plotBar2 = function(var, res, varname = NA, title = NA, varLevels = NA, resLevels = NA,
-                     seed = NA, legend = T, type = "fill"){
+                     seed = NA, legend = T, type = "fill", verb = T){
   
   if(!is.factor(var) || !is.factor(res)){
     stop(simpleError("Var or res is/are not factor variable/s."))
@@ -50,7 +50,9 @@ plotBar2 = function(var, res, varname = NA, title = NA, varLevels = NA, resLevel
   colnames(data) = c("group1",'group2')
   
   
-  cat('Random Seed: ',seed, '\n')
+  if(verb){
+    cat('Random Seed: ',seed, '\n')
+  }
   
   plt = ggplot(data, aes(fill=group1 ,x=group2)) + 
     geom_bar(position=type, stat="count")+

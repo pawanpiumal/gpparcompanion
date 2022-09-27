@@ -11,7 +11,8 @@ plotBox(
   varname = NA,
   resLevels = NA,
   seed = NA,
-  legend = F
+  legend = F,
+  verb = T
 )
 }
 \arguments{
