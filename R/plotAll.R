@@ -28,8 +28,8 @@ plotAll = function(data, methodSc ='glm', labels= NA, seed = NA){
   labelTheme = theme_classic()+
     theme(axis.line = element_blank())
   
-  theme2 = theme(title = element_text(size= 20, face = "bold"))
-  theme2 = calc_element('title',theme)
+  theme2 = theme(title = element_text(size= 40, face = "bold"))
+  theme2 = calc_element('title',theme2)
   
   pb = txtProgressBar(min = 0, max =ncol*ncol, initial = 0)
   stepi = 0
@@ -92,8 +92,8 @@ savePlotList = function(list, filename, open = F, title=NA){
   labelTheme = theme_classic()+
     theme(axis.line = element_blank())
   
-  theme2 = theme(title = element_text(size= 30, face = "bold"))
-  theme2 = calc_element('title',theme)
+  theme2 = theme(title = element_text(size= 70, face = "bold"))
+  theme2 = calc_element('title',theme2)
   
   plot = cowplot::plot_grid(plotlist = list, rel_widths = c(1,rep(10,sqrt(length(list))-1)), 
                             rel_heights = c(rep(10,sqrt(length(list))-1),1))
