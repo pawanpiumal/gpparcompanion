@@ -25,4 +25,6 @@ Imports:
     ryouready,
     rcompanion,
     ggcorrplot,
-    ggpubr
+    ggpubr,
+    png,
+    grid
