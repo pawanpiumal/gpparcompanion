@@ -88,7 +88,7 @@ plotAll = function(data, methodSc ='glm', labels= NA, seed = NA){
 }
 
 #' @export
-savePlotList = function(list, filename, open = F, title=NA){
+savePlotList = function(list, filename, open = F, title=NA, size = 77){
   labelTheme = theme_classic()+
     theme(axis.line = element_blank())
   
@@ -105,7 +105,7 @@ savePlotList = function(list, filename, open = F, title=NA){
       labelTheme
     plot = cowplot::plot_grid(titlePlot, plot, ncol = 1, rel_heights = c(1,sqrt(length(list))*5))
   }
-  png(filename, units="in", width=sqrt(length(list))*5, height=sqrt(length(list))*5, res = 300)
+  png(filename, units="in", width=size, height=size, res = 300)
   print(plot)
   dev.off()
   if(open){
