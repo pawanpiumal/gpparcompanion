@@ -88,7 +88,8 @@ plotAll = function(data, methodSc ='glm', labels= NA, seed = NA, font = 20){
 }
 
 #' @export
-savePlotList = function(list, filename, openT = F, title=NA, size = 77, side = "upper", font=40, borderT = T,returnT = F){
+savePlotList = function(list, filename, openT = F, title=NA, size = 77, side = "upper", font=40, 
+                        borderT = T,returnT = F, res = 72){
   labelTheme = theme_classic()+
     theme(axis.line = element_blank())
   
@@ -134,7 +135,7 @@ savePlotList = function(list, filename, openT = F, title=NA, size = 77, side = "
   }
   
   print("Start")
-  timer = proc.time()
+  timer = Sys.time()
   plot = cowplot::plot_grid(plotlist = list, rel_widths = c(1,rep(10,sqrt(length(list))-1)), 
                             rel_heights = c(rep(10,sqrt(length(list))-1),1))
   if(!is.na(title)){
@@ -145,7 +146,7 @@ savePlotList = function(list, filename, openT = F, title=NA, size = 77, side = "
       labelTheme
     plot = cowplot::plot_grid(titlePlot, plot, ncol = 1, rel_heights = c(1,sqrt(length(list))*5))
   }
-  png(filename, units="in", width=size, height=size, res = 300)
+  png(filename, units="in", width=size, height=size, res = res)
   
   print(plot)
   dev.off()
@@ -154,7 +155,7 @@ savePlotList = function(list, filename, openT = F, title=NA, size = 77, side = "
     grid::grid.raster(img)
   }
   print('Completed')
-  print(proc.time()-timer)
+  print(Sys.time()-timer)
   if(returnT){
     return(plot)
   }
