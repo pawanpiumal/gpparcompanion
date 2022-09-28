@@ -14,21 +14,21 @@
 #'
 #' @param seed The seed for the color of the plot
 #' 
-#' @param text Print category name on plot
+#' @param textT Print category name on plot
 #' 
-#' @param frequency Print frequency values on plot
+#' @param frequencyT Print frequency values on plot
 #' 
-#' @param percentage Print percentage values on plot
+#' @param percentageT Print percentage values on plot
 #' 
-#' @param legend Print legend
+#' @param legendT Print legend
 #' 
-#' @param out Show legend outside
+#' @param outT Show legend outside
 #' 
-#' @param groupOut Show the group name outside the chart
+#' @param groupOutT Show the group name outside the chart
 #'
 #' @export
-plotPie = function(var,title = NA,varname = NA, levels=NA, seed = NA, text = F, 
-                   frequency = F, percentage = F, legend = T, out = F, groupOut = F, verb = T){
+plotPie = function(var,title = NA, varname = NA, levels=NA, seed = NA, textT = F, 
+                   titleT = T, frequencyT = F, percentageT = F, legendT = T, outT = F, groupOutT = F, verbT = T){
   
   if(!is.factor(var)){
     stop(simpleError("Variable is not factor."))
@@ -73,31 +73,35 @@ plotPie = function(var,title = NA,varname = NA, levels=NA, seed = NA, text = F,
     theme_void() + 
     #theme(legend.position="none") +
     scale_fill_manual(values = randomColor(seed,length(variable)))+
-    labs(title=title)+
     geomTheme+
     theme(plot.title = element_text(face="bold",size=17))+
     theme(legend.title.align = 0.75,legend.text = element_text(),
           legend.title = element_text(face="bold"))+
     labs(fill="Group")
   
-  if(verb){
+  if(verbT){
     cat('Random Seed: ',seed, '\n')
+  }
+  
+  if(titleT){
+    plt = plt + 
+      labs(title=title)
   }
   
   Str = ""
   
-  if(text){
+  if(textT){
     Str = "%text"
   }
   
-  if(frequency){
+  if(frequencyT){
     Str = if(Str!="") 
       paste(Str,"%frequency", sep="\n") 
     else 
       "%frequency"
   }
   
-  if(percentage){
+  if(percentageT){
     Str = if(Str!="") 
       paste(Str,"%percentage%", sep="\n") 
     else 
@@ -105,7 +109,7 @@ plotPie = function(var,title = NA,varname = NA, levels=NA, seed = NA, text = F,
   }
   
 
-  if(Str != "" && out == F){
+  if(Str != "" && outT == F){
     plt = plt +
       geom_text(aes(y = ypos, 
                     # label = paste(group, freq, round(value,3)*100, sep="\n")),
@@ -116,7 +120,7 @@ plotPie = function(var,title = NA,varname = NA, levels=NA, seed = NA, text = F,
                                                                                     string = Str)))),
                 color = "black", 
                 size=5)
-  }else if(Str != "" && out == T){
+  }else if(Str != "" && outT == T){
     plt = plt +
       ggrepel::geom_label_repel(aes(y = ypos,
                     # label = paste(group, freq, round(value,3)*100, sep="\n")),
@@ -132,13 +136,13 @@ plotPie = function(var,title = NA,varname = NA, levels=NA, seed = NA, text = F,
       
   }
   
-  if(groupOut){
+  if(groupOutT){
     plt = plt+
       scale_y_continuous(breaks = data$ypos, labels = data$group)+
       theme(axis.text = element_text(size = 15))
   }
   
-  if(!legend){
+  if(!legendT){
     plt = plt + geomTheme2
   }
   

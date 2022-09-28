@@ -4,7 +4,7 @@
 \alias{plotAll}
 \title{Plot Data frame}
 \usage{
-plotAll(data)
+plotAll(data, methodSc = "glm")
 }
 \description{
 Plot all variables in a data frame

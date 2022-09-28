@@ -10,11 +10,15 @@ plotSc(
   pName = NA,
   resName = NA,
   seed = NA,
-  title = T,
+  title = NA,
+  titleT = T,
   method = "auto",
   transX = NA,
   transY = NA,
-  verb = T
+  verbT = T,
+  labXT = T,
+  labYT = T,
+  r2T = T
 )
 }
 \description{

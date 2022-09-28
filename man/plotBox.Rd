@@ -9,10 +9,13 @@ plotBox(
   res,
   title = NA,
   varname = NA,
+  resname = NA,
   resLevels = NA,
   seed = NA,
-  legend = F,
-  verb = T
+  verbT = T,
+  titleT = T,
+  labXT = T,
+  labYT = T
 )
 }
 \arguments{

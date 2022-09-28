@@ -10,13 +10,14 @@ plotPie(
   varname = NA,
   levels = NA,
   seed = NA,
-  text = F,
-  frequency = F,
-  percentage = F,
-  legend = T,
-  out = F,
-  groupOut = F,
-  verb = T
+  textT = F,
+  titleT = T,
+  frequencyT = F,
+  percentageT = F,
+  legendT = T,
+  outT = F,
+  groupOutT = F,
+  verbT = T
 )
 }
 \arguments{
@@ -31,17 +32,17 @@ a qualitative variable.}
 
 \item{seed}{The seed for the color of the plot}
 
-\item{text}{Print category name on plot}
+\item{textT}{Print category name on plot}
 
-\item{frequency}{Print frequency values on plot}
+\item{frequencyT}{Print frequency values on plot}
 
-\item{percentage}{Print percentage values on plot}
+\item{percentageT}{Print percentage values on plot}
 
-\item{legend}{Print legend}
+\item{legendT}{Print legend}
 
-\item{out}{Show legend outside}
+\item{outT}{Show legend outside}
 
-\item{groupOut}{Show the group name outside the chart}
+\item{groupOutT}{Show the group name outside the chart}
 }
 \description{
 This function plots the pie plot for

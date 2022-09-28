@@ -3,7 +3,7 @@
 #' @description  Plot all variables in a data frame
 #'
 #' @export
-plotAll = function(data){
+plotAll = function(data, methodSc ='glm'){
   ncol = ncol(data)
   
   for(i in 1:ncol){
@@ -13,39 +13,34 @@ plotAll = function(data){
     }
   }
   
-  theme = theme(plot.title = element_blank(),
-                legend.position = 'none')
-  
-  
   plList = list()
   
   pb = txtProgressBar(min = 0, max =ncol*ncol, initial = 0)
   stepi = 0
   for(i in 1:ncol){
     for(j in 1:ncol){
-      x = data[,i]
-      y = data[,j]
+      x = data[,j]
+      y = data[,i]
       
       
-      if(identical(x,y)){
+      if(i==j){
         if(is.numeric(x)){
-          plt = plotHB(x, verb = F)+theme
+          plt = plotHB(x, verb = F,legendT= F, titleT = F, labXT = F, labYT = F)
         }else{
-          plt = plotPie(x, verb = F)+theme
+          plt = plotPie(x, verb = F,legend = F , titleT = F, textT = T, percentageT = T)
         }
-      }
-      
-      if(is.numeric(x)){
+      }else if(is.numeric(x)){
         if(is.factor(y)){
-          plt = plotBox(x,y, verb = F)+theme
+          plt = plotBox(x,y, verb = F,titleT = F,labXT = F,labYT = F)
         }else{
-          plt = plotSc(x,y, verb = F)+theme
+          plt = plotSc(x,y, verb = F,titleT = F , labXT = F, labYT = F, method = methodSc)
         }
       }else{
         if(is.factor(y)){
-          plt = plotBar(x,y, verb = F)+theme
+          plt = plotBar(x,y, verbT = F, legendT = F, numberT = T, textT = T, outT= F,
+                        labXT = F, labYT = F, titleT =F)
         }else{
-          plt = plotBox(y,x, verb = F)+theme
+          plt = plotBox(y,x, verb = F,titleT = F,labXT = F,labYT = F)
         }
       }
       

@@ -4,17 +4,20 @@
 #' 
 #' 
 #' @export
-plotSc = function(var, res, pName=NA, resName= NA ,seed=NA, title = T, method = "auto", 
-                  transX = NA, transY = NA, verb = T){
+plotSc = function(var, res, pName=NA, resName= NA ,seed=NA,title = NA, titleT = T, method = "auto", 
+                  transX = NA, transY = NA, verbT = T, labXT = T, labYT = T, r2T = T){
   
   if(!is.numeric(var) || !is.numeric(res)){
     stop(simpleError("Var or res is/are not numeric variable/s"))
   }
   
-  if (is.na(title)) title <- deparse(substitute(var))
+  
   
   if (is.na(pName)) pName <- deparse(substitute(var))
   if (is.na(resName)) resName <- deparse(substitute(res))
+  
+  if (is.na(title)) title <- paste(pName," vs ",resName)
+  
   
   if(is.na(seed)) seed = runif(1,1,1000)
   
@@ -50,20 +53,35 @@ plotSc = function(var, res, pName=NA, resName= NA ,seed=NA, title = T, method = 
   
   data = data.frame(var=var,res=res)
   
-  if(verb){
+  if(verbT){
     cat('Random Seed: ',seed, '\n')
   }
   plt = ggplot(data,aes(x=funcX(var),y=funcY(res)))+
     geom_point(size=2,color=randomColor(seed))+
     geom_smooth(method=method, se=T, color = "black", size=1.4, formula = y~x)+
-    labs(title=paste(pName," vs ",resName), 
+    labs(title=title, 
          y = yName,
          x = xName)+
-    geomTheme+
-    ggpmisc::stat_poly_eq(formula = y~x, 
-                 aes(label = paste(..rr.label.., sep = "~~~")), 
-                 parse = TRUE)
+    geomTheme
   
+  if(!titleT){
+    plt = plt + theme(plot.title = element_blank())
+  }
+  
+  if(!labXT){
+    plt = plt + scale_x_continuous(name = element_blank())
+  }
+  
+  if(!labYT){
+    plt = plt + scale_y_continuous(name = element_blank())
+  }
+  
+  if(r2T){
+    plt = plt +
+      ggpmisc::stat_poly_eq(formula = y~x, 
+                            aes(label = paste(..rr.label.., sep = "~~~")), 
+                            parse = TRUE)
+  }
   
   return (plt)
 }

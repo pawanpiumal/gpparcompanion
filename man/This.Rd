@@ -15,10 +15,15 @@ plotBar(
   resLevels = NA,
   groupLevels = NA,
   seed = NA,
-  legend = T,
-  number = T,
+  legendT = T,
+  numberT = T,
   type = "fill",
-  verb = T
+  verbT = T,
+  textT = T,
+  outT = F,
+  titleT = T,
+  labXT = T,
+  labYT = T
 )
 
 plotBar2(

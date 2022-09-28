@@ -8,8 +8,8 @@
 #' 
 #' 
 #' @export
-plotBox = function(var, res, title = NA, varname = NA, resLevels= NA, seed = NA,
-                   legend = F, verb = T){
+plotBox = function(var, res, title = NA, varname = NA, resname = NA, resLevels= NA, seed = NA,
+                  verbT = T, titleT = T, labXT = T, labYT =T ){
   # Themes
   # Center Plot Title
   geomTheme = theme(plot.title = element_text(hjust = 0.5,face="bold"))
@@ -28,6 +28,7 @@ plotBox = function(var, res, title = NA, varname = NA, resLevels= NA, seed = NA,
   
   if (is.na(title)) title <- deparse(substitute(var))
   if (is.na(varname)) varname <- deparse(substitute(var))
+  if (is.na(resname)) resname <- deparse(substitute(res))
   
   if(is.na(seed)) seed = runif(1,1,100000)
   
@@ -38,19 +39,33 @@ plotBox = function(var, res, title = NA, varname = NA, resLevels= NA, seed = NA,
   
   data = data.frame(response,var)
 
-  if(verb){
+  if(verbT){
     cat('Random Seed: ',seed, '\n')
   }
   plt = ggplot(data, aes(x=response, y=var, fill=response)) + 
     geom_boxplot() +
-    xlab(res) +
     theme(legend.position="none") +
     theme(legend.title.align = 0.75,legend.text = element_text(),
           legend.title = element_text(face="bold"))+
     scale_fill_manual(values = randomColor(seed,1000))+
-    theme(axis.title.y = element_blank())+
     labs(title=title)+
     geomTheme
+  
+  if(labXT){
+    plt = plt + xlab(resname)
+  }else{
+    plt = plt + theme(axis.title.x = element_blank())
+  }
+  
+  if(labYT){
+    plt = plt + ylab(varname)
+  }else{
+    plt = plt + theme(axis.title.y = element_blank())
+  }
+  
+  if(!titleT){
+    plt = plt + theme(plot.title = element_blank())
+  }
   
   return (plt)
 }

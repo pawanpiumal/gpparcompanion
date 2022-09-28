@@ -16,7 +16,8 @@
 #' histogram
 #'
 #' @export
-plotHB <- function(var, title = NA, varname = NA, seed = NA, histX = F, verb = T) {
+plotHB <- function(var, title = NA, varname = NA, seed = NA, histXT = F, verbT = T, titleT =T, legendT = T,
+                   labXT = T, labYT = T) {
   
   if(!is.numeric(var)){
     stop(simpleError("Variable is not numeric."))
@@ -48,7 +49,6 @@ plotHB <- function(var, title = NA, varname = NA, seed = NA, histX = F, verb = T
     coord_flip() +
     theme_classic() +
     xlab("") +
-    ylab(title) +
     theme(
       axis.text.y = element_blank(),
       axis.ticks.y = element_blank()
@@ -58,11 +58,16 @@ plotHB <- function(var, title = NA, varname = NA, seed = NA, histX = F, verb = T
   }else{
     bins = length(var)
   }
+  
+  if(labXT){
+    plt1 = plt1+ylab(title)
+  }else{
+    plt1 = plt1 + scale_y_continuous(name=element_blank())
+  }
+  
   plt2 <- ggplot(data, aes(x = get(colnames(data)[1]), fill = f)) +
     geom_histogram(bins = bins, color = randomColor(seed),
                    key_glyph = draw_key_blank)  +
-    ylab("Frequency") +
-    labs(title = title) +
     theme_classic() +
     xlab("") +
     geomTheme +
@@ -82,11 +87,25 @@ plotHB <- function(var, title = NA, varname = NA, seed = NA, histX = F, verb = T
       legend.title = element_text(face = "bold")
     )
   
-  if(histX == F){
+  if(histXT == F){
     plt2 = plt2 + geomTheme3
   }
   
-  if(verb){
+  if(titleT){
+    plt2 = plt2 + labs(title = title)
+  }
+  
+  if(legendT == F){
+    plt2 = plt2 + theme(legend.title = element_blank())
+  }
+  
+  if(labYT){
+    plt2 = plt2 + ylab("Frequency")
+  }else{
+    plt2 = plt2 + scale_y_continuous(name=element_blank())
+  }
+  
+  if(verbT){
     cat('Random Seed: ',seed, '\n')
   }
   return (cowplot::plot_grid(plt2, plt1,
