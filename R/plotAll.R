@@ -35,7 +35,7 @@ plotAll = function(data, methodSc ='glm', labels= NA, seed = NA){
   stepi = 0
   for(i in 1:ncol){
     y = data[,i]
-    yLabel = ggplot()+draw_label(label=labels[i], angle = 90,fontface = theme2$face,
+    yLabel = ggplot()+cowplot::draw_label(label=labels[i], angle = 90,fontface = theme2$face,
                                  size = theme2$size)+
       labelTheme
     
@@ -74,7 +74,7 @@ plotAll = function(data, methodSc ='glm', labels= NA, seed = NA){
   plList = append(plList, list(blank))
   
   for(k in 1:(ncol)){
-    xlabel = ggplot()+draw_label(label=labels[k],fontface = theme2$face,
+    xlabel = ggplot()+cowplot::draw_label(label=labels[k],fontface = theme2$face,
                                  size = theme2$size)+
       labelTheme
     
@@ -99,7 +99,7 @@ savePlotList = function(list, filename, open = F, title=NA){
                             rel_heights = c(rep(10,sqrt(length(list))-1),1))
   if(!is.na(title)){
     titlePlot = ggplot()+
-      draw_label(label=title,
+      cowplot::draw_label(label=title,
                  fontface = theme2$face,
                  size = theme2$size)+
       labelTheme
