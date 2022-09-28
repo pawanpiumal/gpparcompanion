@@ -134,6 +134,7 @@ savePlotList = function(list, filename, openT = F, title=NA, size = 77, side = "
   }
   
   print("Start")
+  timer = proc.time()
   plot = cowplot::plot_grid(plotlist = list, rel_widths = c(1,rep(10,sqrt(length(list))-1)), 
                             rel_heights = c(rep(10,sqrt(length(list))-1),1))
   if(!is.na(title)){
@@ -153,6 +154,7 @@ savePlotList = function(list, filename, openT = F, title=NA, size = 77, side = "
     grid::grid.raster(img)
   }
   print('Completed')
+  print(proc.time()-timer)
   if(returnT){
     return(plot)
   }
