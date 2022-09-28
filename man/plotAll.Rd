@@ -4,7 +4,7 @@
 \alias{plotAll}
 \title{Plot Data frame}
 \usage{
-plotAll(data, methodSc = "glm", labels = NA, seed = NA)
+plotAll(data, methodSc = "glm", labels = NA, seed = NA, font = 20)
 }
 \description{
 Plot all variables in a data frame

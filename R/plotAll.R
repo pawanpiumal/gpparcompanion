@@ -3,7 +3,7 @@
 #' @description  Plot all variables in a data frame
 #'
 #' @export
-plotAll = function(data, methodSc ='glm', labels= NA, seed = NA){
+plotAll = function(data, methodSc ='glm', labels= NA, seed = NA, font = 20){
   ncol = ncol(data)
   
   if(is.na(labels)){
@@ -28,7 +28,7 @@ plotAll = function(data, methodSc ='glm', labels= NA, seed = NA){
   labelTheme = theme_classic()+
     theme(axis.line = element_blank())
   
-  theme2 = theme(title = element_text(size= 40, face = "bold"))
+  theme2 = theme(title = element_text(size= font, face = "bold"))
   theme2 = calc_element('title',theme2)
   
   pb = txtProgressBar(min = 0, max =ncol*ncol, initial = 0)
@@ -88,13 +88,52 @@ plotAll = function(data, methodSc ='glm', labels= NA, seed = NA){
 }
 
 #' @export
-savePlotList = function(list, filename, open = F, title=NA, size = 77){
+savePlotList = function(list, filename, openT = F, title=NA, size = 77, side = "upper", font=40, borderT = T,returnT = F){
   labelTheme = theme_classic()+
     theme(axis.line = element_blank())
   
-  theme2 = theme(title = element_text(size= 70, face = "bold"))
+  blank = ggplot()+labelTheme
+  
+  theme2 = theme(title = element_text(size= font, face = "bold"))
   theme2 = calc_element('title',theme2)
   
+  if(!(side %in% c('upper','lower','both'))){
+    stop(simpleError("Side should be upper, lower or both."))
+  }
+  
+  mat = matrix(seq(1,length(list),1), nrow = sqrt(length(list)), ncol = sqrt(length(list)),byrow = T)
+  if(side == 'upper'){
+    for(i in 1:nrow(mat)){
+      if(i==ncol(mat)) next
+      for(j in 1:ncol(mat)){
+        if(j==1) next
+        if(j %in% seq(1,i)){
+          mat[i,j] = 0
+        }
+      }
+    }
+  }else if(side == 'lower'){
+    for(i in 1:nrow(mat)){
+      if(i==ncol(mat)) next
+      for(j in 1:ncol(mat)){
+        if(j==1) next
+        if(j %in% seq(i+2,ncol(mat)+1)){
+          mat[i,j] = 0
+        }
+      }
+    }
+  }
+  for(i in 1:length(c(t(mat)))){
+    if(c(t(mat))[i]==0)  list[[i]] = blank
+  }
+  
+  if(borderT){
+    for(i in 1:length(list)){
+      list[[i]] = list[[i]]+theme(plot.background = element_rect(color = "black"))
+    }
+  }
+  
+  print("Start")
   plot = cowplot::plot_grid(plotlist = list, rel_widths = c(1,rep(10,sqrt(length(list))-1)), 
                             rel_heights = c(rep(10,sqrt(length(list))-1),1))
   if(!is.na(title)){
@@ -106,11 +145,15 @@ savePlotList = function(list, filename, open = F, title=NA, size = 77){
     plot = cowplot::plot_grid(titlePlot, plot, ncol = 1, rel_heights = c(1,sqrt(length(list))*5))
   }
   png(filename, units="in", width=size, height=size, res = 300)
+  
   print(plot)
   dev.off()
-  if(open){
+  if(openT){
     img = png::readPNG(filename)
     grid::grid.raster(img)
   }
   print('Completed')
+  if(returnT){
+    return(plot)
+  }
 }
