@@ -105,7 +105,12 @@ pearsonMatrix = function(data){
 }
 
 #' @export
-effectSizeGraph = function(matrix, ...){
-  plt = matrix %>% ggcorrplot::ggcorrplot(show.diag = F, type="lower", lab=TRUE, lab_size=3.3, ...) 
+effectSizeGraph = function(matrix, eta = F, ...){
+  if(eta){
+    plt = matrix %>% ggcorrplot::ggcorrplot(type="full", lab=TRUE, lab_size=3.3, ...) 
+  }else{
+    plt = matrix %>% ggcorrplot::ggcorrplot(show.diag = F, type="lower", lab=TRUE, lab_size=3.3, ...) 
+  }
+  
   return(plt)
 }
