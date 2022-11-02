@@ -34,8 +34,9 @@ plotHB <- function(var, title = NA, varname = NA, seed = NA, histXT = F, verbT =
     axis.ticks.x = element_blank()
   )
   
-  if (is.na(title)) title <- deparse(substitute(var))
+  
   if (is.na(varname)) varname <- deparse(substitute(var))
+  if (is.na(title)) title <- varname
   
   f <- factor(sample(c("a", "b", "c", "d", "e"), length(var), T))
   levels(f) <- c("a", "b", "c", "d", "e")

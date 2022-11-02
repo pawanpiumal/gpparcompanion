@@ -47,7 +47,7 @@ plotAll = function(data, methodSc ='glm', labels= NA, seed = NA, font = 20, labe
       
       if(i==j){
         if(is.numeric(x)){
-          plt = plotHB(x, verb = F,legendT= F, titleT = labelsT,labXT = F, labYT = labelsT, seed = seeds[i],
+          plt = plotHB(x, verb = F,legendT= F, titleT = labelsT,labXT = F, labYT = F, seed = seeds[i],
                       varname = xname)
         }else{
           plt = plotPie(x, verb = F,legend = F , titleT = labelsT, textT = T, percentageT = T, seed = seeds[i],
@@ -64,7 +64,7 @@ plotAll = function(data, methodSc ='glm', labels= NA, seed = NA, font = 20, labe
           plt = plotBar(x,y, verbT = F, legendT = F, numberT = T, textT = T, outT= F,
                         labXT = labelsT, labYT = labelsT, titleT =F, seed = seeds[i]*seeds[j], varname = xname, resname = yname)+coord_flip()
         }else{
-          plt = plotBox(y,x, verb = F,titleT = F,labXT = labelsT,labYT = labelsT, seed = seeds[i]*seeds[j], varname = xname, resname = yname)
+          plt = plotBox(y,x, verb = F,titleT = F,labXT = labelsT,labYT = labelsT, seed = seeds[i]*seeds[j], varname = yname, resname = xname)
         }
       }
       plList = append(plList, list(plt))
