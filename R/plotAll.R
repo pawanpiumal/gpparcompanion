@@ -62,7 +62,7 @@ plotAll = function(data, methodSc ='glm', labels= NA, seed = NA, font = 20, labe
       }else{
         if(is.factor(y)){
           plt = plotBar(x,y, verbT = F, legendT = F, numberT = T, textT = T, outT= F,
-                        labXT = labelsT, labYT = labelsT, titleT =F, seed = seeds[i]*seeds[j], varname = xname, resname = yname)+coord_flip()
+                        labXT = labelsT, labYT = labelsT, titleT =F, seed = seeds[i]*seeds[j], varname = xname)+coord_flip()
         }else{
           plt = plotBox(y,x, verb = F,titleT = F,labXT = labelsT,labYT = labelsT, seed = seeds[i]*seeds[j], varname = yname, resname = xname)
         }
