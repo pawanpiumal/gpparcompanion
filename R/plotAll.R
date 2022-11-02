@@ -35,6 +35,7 @@ plotAll = function(data, methodSc ='glm', labels= NA, seed = NA, font = 20, labe
   stepi = 0
   for(i in 1:ncol){
     y = data[,i]
+    yname = colnames(data)[i]
     yLabel = ggplot()+cowplot::draw_label(label=labels[i], angle = 90,fontface = theme2$face,
                                  size = theme2$size)+
       labelTheme
@@ -42,26 +43,28 @@ plotAll = function(data, methodSc ='glm', labels= NA, seed = NA, font = 20, labe
     plList = append(plList, list(yLabel))
     for(j in 1:ncol){
       x = data[,j]
-      
+      xname = colnames(data)[j]
       
       if(i==j){
         if(is.numeric(x)){
-          plt = plotHB(x, verb = F,legendT= F, titleT = F, labXT = F, labYT = labelsT, seed = seeds[i])
+          plt = plotHB(x, verb = F,legendT= F, titleT = labelsT,labXT = F, labYT = labelsT, seed = seeds[i],
+                      varname = xname)
         }else{
-          plt = plotPie(x, verb = F,legend = F , titleT = F, textT = T, percentageT = T, seed = seeds[i])
+          plt = plotPie(x, verb = F,legend = F , titleT = labelsT, textT = T, percentageT = T, seed = seeds[i],
+                        varname = xname)
         }
       }else if(is.numeric(x)){
         if(is.factor(y)){
-          plt = plotBox(x,y, verb = F,titleT = F,labXT = labelsT,labYT = labelsT, seed = seeds[i]*seeds[j])+coord_flip()
+          plt = plotBox(x,y, verb = F,titleT = F,labXT = labelsT,labYT = labelsT, seed = seeds[i]*seeds[j], varname = xname, resname = yname)+coord_flip()
         }else{
-          plt = plotSc(x,y, verb = F,titleT = F , labXT = labelsT, labYT = labelsT, method = methodSc, seed = seeds[i]*seeds[j])
+          plt = plotSc(x,y, verb = F,titleT = F , labXT = labelsT, labYT = labelsT, method = methodSc, seed = seeds[i]*seeds[j], varname = xname, resname = yname)
         }
       }else{
         if(is.factor(y)){
           plt = plotBar(x,y, verbT = F, legendT = F, numberT = T, textT = T, outT= F,
-                        labXT = labelsT, labYT = labelsT, titleT =F, seed = seeds[i]*seeds[j])+coord_flip()
+                        labXT = labelsT, labYT = labelsT, titleT =F, seed = seeds[i]*seeds[j], varname = xname, resname = yname)+coord_flip()
         }else{
-          plt = plotBox(y,x, verb = F,titleT = F,labXT = labelsT,labYT = labelsT, seed = seeds[i]*seeds[j])
+          plt = plotBox(y,x, verb = F,titleT = F,labXT = labelsT,labYT = labelsT, seed = seeds[i]*seeds[j], varname = xname, resname = yname)
         }
       }
       plList = append(plList, list(plt))
