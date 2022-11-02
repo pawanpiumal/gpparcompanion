@@ -57,7 +57,7 @@ plotAll = function(data, methodSc ='glm', labels= NA, seed = NA, font = 20, labe
         if(is.factor(y)){
           plt = plotBox(x,y, verb = F,titleT = F,labXT = labelsT,labYT = labelsT, seed = seeds[i]*seeds[j], varname = xname, resname = yname)+coord_flip()
         }else{
-          plt = plotSc(x,y, verb = F,titleT = F , labXT = labelsT, labYT = labelsT, method = methodSc, seed = seeds[i]*seeds[j], p = xname, resname = yname)
+          plt = plotSc(x,y, verb = F,titleT = F , labXT = labelsT, labYT = labelsT, method = methodSc, seed = seeds[i]*seeds[j], p = xname, resName = yname)
         }
       }else{
         if(is.factor(y)){
