@@ -47,7 +47,7 @@ plotAll = function(data, methodSc ='glm', labels= NA, seed = NA, font = 20, labe
       
       if(i==j){
         if(is.numeric(x)){
-          plt = plotHB(x, verb = F,legendT= F, titleT = labelsT,labXT = F, labYT = F, seed = seeds[i],
+          plt = plotHB(x, verb = F,legendT= F, titleT = labelsT, labXT = F, labYT = F, seed = seeds[i],
                       varname = xname)
         }else{
           plt = plotPie(x, verb = F,legend = F , titleT = labelsT, textT = T, percentageT = T, seed = seeds[i],
