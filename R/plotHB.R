@@ -60,7 +60,7 @@ plotHB <- function(var, title = NA, varname = NA, seed = NA, histXT = F, verbT =
   }
   
   if(labXT){
-    plt1 = plt1+ylab(title)
+    plt1 = plt1+ylab(varname)
   }else{
     plt1 = plt1 + scale_y_continuous(name=element_blank())
   }

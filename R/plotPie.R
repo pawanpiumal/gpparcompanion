@@ -45,8 +45,9 @@ plotPie = function(var,title = NA, varname = NA, levels=NA, seed = NA, textT = F
                      axis.ticks.x=element_blank())
   
   
-  if (is.na(title)) title <- deparse(substitute(var))
+  
   if (is.na(varname)) varname <- deparse(substitute(var))
+  if (is.na(title)) title <- varname
   
   if(is.na(seed)) seed = runif(1,1,1000)
   
